@@ -1,0 +1,25 @@
+﻿@model ShopingWebSite.Models.Category
+
+@{
+    ViewBag.Title = "EditCategory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>EditCategory</h2>
+<div class="panel">
+    <div class="panel-heading">
+        <h3>Edit category</h3>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(x=>x.Id)
+            <div class="form-group">
+                @Html.LabelFor(x => x.Name)
+                @Html.TextBoxFor(x => x.Name, new { @class = "form-control"})
+            </div>
+            <input type="submit" value="edit"/>
+        }
+    </div>
+</div>
+

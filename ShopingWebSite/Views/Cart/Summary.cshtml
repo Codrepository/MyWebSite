@@ -1,0 +1,9 @@
+﻿@model ShopingWebSite.Models.Cart
+        <div class="navbar-text">
+            <a href="@Url.Action("Index","Cart",new { returnUrl = Request.Url.PathAndQuery})" >
+                @HttpContext.GetGlobalResourceObject("Labels","Cart")
+                <div class="badge">@Model.Lines.Sum(x => x.Quantity) </div>
+            </a>
+        </div>
+        
+        

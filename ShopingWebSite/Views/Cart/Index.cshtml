@@ -1,0 +1,58 @@
+﻿@model ShopingWebSite.Models.CartIndexViewModel
+
+@{
+    ViewBag.Title = "Your Cart detail";
+}
+<style>
+    #cartTable td {vertical-align:middle;}
+</style>
+
+<h2>@HttpContext.GetGlobalResourceObject("Labels","YourCart")</h2>
+<table id="cartTable" class="table text-right">
+    <thead>
+        <tr>
+            <th>@HttpContext.GetGlobalResourceObject("Labels", "Quantity")</th>
+            <th>@HttpContext.GetGlobalResourceObject("Labels", "Name")</th>
+            <th class="text-left">@HttpContext.GetGlobalResourceObject("Labels", "Price")</th>
+            <th class="text-left">@HttpContext.GetGlobalResourceObject("Labels", "SubTotal")</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.Cart.Lines)
+        {
+            <tr>
+                <td class="text-right">@line.Quantity</td>
+                <td class="text-right">@line.Product.Name</td>
+                <td class="text-left">@line.Product.Price.ToString()</td>
+                <td class="text-left">
+                    @((line.Quantity * line.Product.Price).ToString())
+                </td>
+                <td>
+                    @using (Html.BeginForm("RemoveFromCart","Cart"))
+                    {
+                        @Html.Hidden("Id", line.Product.Id)
+                        @Html.Hidden("returnUrl", Model.ReturnUrl)
+                        <input type="submit" value="x" class="btn btn btn-sm btn-warning" />
+
+                    }
+                </td>
+
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-left">@HttpContext.GetGlobalResourceObject("Labels", "Total")</td>
+            <td class="text-left">
+                @Model.Cart.ComputeTotalValue().ToString()
+            </td>
+        </tr>
+    </tfoot>
+</table>
+<div class="text-center">
+    <a class="btn btn-primary" href="@Model.ReturnUrl">@HttpContext.GetGlobalResourceObject("Labels", "ContinueShoping")</a>
+    @Html.ActionLink(@HttpContext.GetGlobalResourceObject("Labels", "Ship") as string, "CheckOut", "Cart", new { @class = "btn btn-primary" })
+</div>
+
+   
+

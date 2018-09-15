@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Layout.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap-rtl.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="navbar navbar-inverse  navbar-fixed-top" >
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                    @Html.ActionLink(@HttpContext.GetGlobalResourceObject("Labels", "HeaderText") as string, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                
+               
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink(@HttpContext.GetGlobalResourceObject("Labels", "Home") as string, "Index", "Home")</li>
+                    <li>@Html.ActionLink(@HttpContext.GetGlobalResourceObject("Labels", "About") as string, "About", "Home")</li>
+                    <li>@Html.ActionLink(@HttpContext.GetGlobalResourceObject("Labels", "ContactUs") as string, "Contact", "Home")</li>
+                    <!--add for show Cart-->
+                    <li>@Html.Action("Summary", "Cart")</li>
+                    
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="row">
+        <div class="col-md-2">
+            @Html.Action("Menu","Category")
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <hr />
+                <div>
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ShopingWebSite.Models.AdminProductViewModel>
+
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>@HttpContext.GetGlobalResourceObject("Labels", "AllProducts")</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-condensed table-bordered">
+            <tr>
+                <th class="text-right">@HttpContext.GetGlobalResourceObject("Labels", "Id")</th>
+                <th>@HttpContext.GetGlobalResourceObject("Labels", "Name")</th>
+                <th class="text-right">@HttpContext.GetGlobalResourceObject("Labels", "Price")</th>
+                <th class="text-left">@HttpContext.GetGlobalResourceObject("Labels", "Category")</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-right">@item.Product.Id</td>
+                    <td>@Html.ActionLink(item.Product.Name, "EditProduct", new { Id = item.Product.Id, returnUrl = Request.Url.PathAndQuery })</td>
+                    <td class="text-right">@item.Product.Price</td>
+                    @{ var name = item.Category == null ? "no category" : item.Category.Name;}
+                    <td>@name</td>
+                    <td class="text-center">
+                        @using (Html.BeginForm("DeleteProduct", "Admin"))
+                        {
+                            @Html.Hidden("Id", item.Product.Id)
+                            <input type="submit"
+                                   class="btn btn-danger btn-xs"
+                                   value="x" />
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="panel-footer">
+        @Html.ActionLink(@HttpContext.GetGlobalResourceObject("Labels","CreateNewProduct") as string, "CreateProduct", new { returnUrl = Request.Url.PathAndQuery},
+        new { @class = "btn btn-default" })
+    </div>
+</div>
+

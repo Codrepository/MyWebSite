@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ShopingWebSite.Models.Category>
+
+@{
+    ViewBag.Title = "Categories";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="panel">
+    <div class="panel-heading">
+        <h3>@HttpContext.GetGlobalResourceObject("Labels","Category")</h3>
+        <div>
+            @Html.ActionLink("AddCategory", "AddCategory","Admin",new { returnUrl = Request.Url.PathAndQuery }, new { @class = "btn btn-default"})
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <tr>
+                <th class="text-right">@HttpContext.GetGlobalResourceObject("Labels", "Id")</th>
+                <th>@HttpContext.GetGlobalResourceObject("Labels", "Name")</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-right">@item.Id</td>
+                    <td>@Html.ActionLink(item.Name, "EditCategory", new { Id = item.Id, returnUrl = Request.Url.PathAndQuery })</td>
+                    <td class="text-center">
+                        @using (Html.BeginForm("DeleteCategory", "Admin"))
+                        {
+                            @Html.Hidden("Id", item.Id)
+                            <input type="submit"
+                                   class="btn btn-danger btn-xs"
+                                   value="x" />
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+

@@ -1,0 +1,31 @@
+﻿@model ShopingWebSite.Models.ProductListViewModel
+@{
+    ViewBag.Title = "Products";
+    var x = Model.Category == null ? @HttpContext.GetGlobalResourceObject("Labels", "AllProducts")as string: Model.Category.Name;
+}
+
+<div class="row">
+        <ul class="breadcrumb">
+            <li><h3>@HttpContext.GetGlobalResourceObject("Labels", "Category") / @x /</h3></li>
+            <li><h3>@HttpContext.GetGlobalResourceObject("Labels", "page") / @Model.PageInfo.CurrentPage</h3></li>
+        </ul>
+    
+</div>
+<div class="row">
+    @foreach (var p in Model.Products)
+    {
+        @Html.Action("ProductSummary",new {product = p })
+    }
+</div>
+<div class="row">
+    <ul class="pagination">
+        @for (int i = 1; i <= Model.PageInfo.TotalPages; i++)
+        {
+            var clas = Model.PageInfo.CurrentPage == i ? "active" : "";
+
+            <li class="@clas">@Html.ActionLink(i.ToString(), "List", new { page = i, categoryName = Model.Category == null ? "" : Model.Category.Name })</li>
+
+        }
+    </ul>
+</div>
+

@@ -1,0 +1,38 @@
+﻿@model ShopingWebSite.Models.ProductSummaryViewModel   
+<div class="jumbotron col-xs-10 col-sm-4">
+    <div>
+        <div  class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                @{var firstpictre = Model.Pictures == null ? null : Model.Pictures.FirstOrDefault();}
+                @foreach (var item in Model.Pictures)
+                {
+                    var cssclass = firstpictre != null ? firstpictre.Id == item.Id ? "item active" : "item":"item";
+                    <div class="@cssclass">
+                        <img class="img-thumbnail" src="@Url.Action("GetImage","Picture",new {Id = item.Id})"/>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div>
+        <h3>
+            <strong>@Model.Product.Name</strong>
+        </h3>
+    </div>
+    <div>
+        <label class="label-default">@Model.Product.Price</label>
+        @if (Model.Product.Quantity <= 0)
+        {
+            <label class="btn-info">@HttpContext.GetGlobalResourceObject("Labels", "RunOutOf")</label>
+        }
+        else
+        {
+            using (Html.BeginForm("AddToCart", "Cart"))
+            {
+                @Html.Hidden("Id",Model.Product.Id)
+                @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                <input type="submit" class="btn btn-success" value="@HttpContext.GetGlobalResourceObject("Labels","AddToCart")" />
+            }
+        }
+    </div>
+</div>

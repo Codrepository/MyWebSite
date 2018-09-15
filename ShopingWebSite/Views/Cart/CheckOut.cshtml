@@ -1,0 +1,48 @@
+﻿@model ShopingWebSite.Models.ShipingDetail
+
+@{
+    ViewBag.Title = "CheckOut";
+}
+<div class="panel">
+    <div class="panel-heading">
+        <h2>@HttpContext.GetGlobalResourceObject("Labels", "CompleteShip")</h2>
+        <p>@HttpContext.GetGlobalResourceObject("Messages", "CartCheckOutWelcome")</p>
+    </div>
+    
+    @using (Html.BeginForm())
+    {
+        <div class="panel-body">
+            @Html.ValidationSummary()
+            <div class="form-group">
+                @Html.LabelFor(x => x.State)
+                @Html.TextBoxFor(x => x.State, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x=>x.City)
+                @Html.TextBoxFor(x => x.City, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x=>x.Zip)
+                @Html.TextBoxFor(x => x.Zip, new { @class = "form-control" })
+            </div>
+
+            <h3>@HttpContext.GetGlobalResourceObject("Labels", "Address")</h3>
+            <div class="form-group">
+                @Html.LabelFor(x=>x.Address1)
+                @Html.TextBoxFor(x => x.Address1, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Address2)
+                @Html.TextBoxFor(x => x.Address2, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="text-center">
+
+                <input type="submit" value="@HttpContext.GetGlobalResourceObject("Labels","Ship")" class="btn btn-primary" />
+            </div>
+        </div>
+    }
+
+</div>
