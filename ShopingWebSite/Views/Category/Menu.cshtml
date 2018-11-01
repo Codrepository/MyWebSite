@@ -1,20 +1,24 @@
 ﻿@model IEnumerable<string>
 
-<nav>
-    
-                @Html.RouteLink(@HttpContext.GetGlobalResourceObject("Labels", "AllProducts") as string, new { controller = "Product", action = "List", categoryName = "", page = 1 },new { @class = "btn btn-block btn-default btn-lg"})
-            
+<div class="container-fluid">
 
-        @foreach (var category in Model)
-        {
-                @Html.RouteLink(category,
+    <div  class="shadow p-2 mb-2 bg-white rounded  border-bottom border-secondary">
+        @Html.RouteLink(@HttpContext.GetGlobalResourceObject("Labels", "AllProducts") as string, new { controller = "Product", action = "List", categoryName = "", page = 1 }, new { @class = "h6 d-block" })
+    </div>
+    @foreach (var category in Model)
+    {
+        <div class="shadow p-2 mb-2 bg-white rounded border-bottom border-secondary">
+
+            @Html.RouteLink(category,
                new
                {
                    controller = "Product",
                    action = "List",
                    categoryName = category,
                    page = 1
-               },new { @class = "btn btn-block btn-default btn-lg"})
-              }
-        
-</nav>
+               }, new { @class = "h6 d-block" })
+        </div>
+
+    }
+</div>
+

@@ -2,28 +2,28 @@
 @if (Request.IsAuthenticated)
 {
     
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-left" }))
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "float-right" }))
     {
     @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-left">
+    <ul class="navbar-nav ml-auto">
        @if (User.IsInRole("Admin"))
        {
-        <li>@Html.ActionLink("Admin Panel", "Index", "Admin")</li>
+        <li class="nav-item">@Html.ActionLink("Admin Panel", "Index", "Admin",new { @class = "nav-link" })</li>
        }
 
-        <li>
-            @Html.ActionLink(@HttpContext.GetGlobalResourceObject("Labels", "Hello") as string + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        <li class="nav-item">
+            @Html.ActionLink(@HttpContext.GetGlobalResourceObject("Labels", "Hello") as string + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link" })
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">@HttpContext.GetGlobalResourceObject("Labels", "LogOut")</a></li>
+        <li class="nav-item"><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">@HttpContext.GetGlobalResourceObject("Labels", "LogOut")</a></li>
        
     </ul>
     }
 }
 else
 {
-    <ul class="nav navbar-nav navbar-left">
-        <li>@Html.ActionLink(@HttpContext.GetGlobalResourceObject("Labels", "Register") as string, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink(@HttpContext.GetGlobalResourceObject("Labels", "LogIn") as string, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    <ul class="navbar-nav justify-content-end">
+        <li class="nav-item">@Html.ActionLink(@HttpContext.GetGlobalResourceObject("Labels", "Register") as string, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink",  @class = "nav-link"  })</li>
+        <li class="nav-item">@Html.ActionLink(@HttpContext.GetGlobalResourceObject("Labels", "LogIn") as string, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link" })</li>
     </ul>
 }

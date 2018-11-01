@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using ShopingWebSite.Models;
 
 namespace ShopingWebSite.Models
 {
@@ -21,7 +22,7 @@ namespace ShopingWebSite.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("ShopingWebsiteContext", throwIfV1Schema: false)
+            : base("ShopingWebSiteContextdb", throwIfV1Schema: false)
         {
         }
 

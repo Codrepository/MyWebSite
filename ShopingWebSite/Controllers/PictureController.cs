@@ -16,7 +16,7 @@ namespace ShopingWebSite.Controllers
         {
             Picture picure = context.Pictures.FirstOrDefault(x => x.Id == Id);
             WebImage image = new WebImage(picure.ImageData);
-            image.Resize(150, 150, false);
+            image.Resize(400, 300, false);
             if (picure != null)
             {
                 return File(image.GetBytes(null), picure.ImageMimeType);
