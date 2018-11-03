@@ -40,7 +40,7 @@ namespace ShopingWebSite.Models
     }
     public class DatabaseContext : DbContext
     {
-        public DatabaseContext() : base("ShopingWebSiteContextdb") { }
+        public DatabaseContext() : base("ShopingWebSitedb") { }
         static DatabaseContext()
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<DatabaseContext, Migrations.Configuration>());

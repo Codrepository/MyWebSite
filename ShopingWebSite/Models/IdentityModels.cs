@@ -22,7 +22,7 @@ namespace ShopingWebSite.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("ShopingWebSiteContextdb", throwIfV1Schema: false)
+            : base("ShopingWebSitedb", throwIfV1Schema: false)
         {
         }
 

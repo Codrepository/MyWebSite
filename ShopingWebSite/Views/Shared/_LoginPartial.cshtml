@@ -9,7 +9,7 @@
     <ul class="navbar-nav ml-auto">
        @if (User.IsInRole("Admin"))
        {
-        <li class="nav-item">@Html.ActionLink("Admin Panel", "Index", "Admin",new { @class = "nav-link" })</li>
+        <li class="nav-item">@Html.ActionLink("Admin Panel", "Index",controllerName: "Admin", routeValues:null,htmlAttributes: new { @class = "nav-link" })</li>
        }
 
         <li class="nav-item">
